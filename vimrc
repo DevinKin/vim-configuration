@@ -3,10 +3,16 @@ call plug#begin('~/.vim/plugged')
 Plug 'itchyny/lightline.vim'
 Plug 'https://github.com/ludovicchabant/vim-gutentags.git'
 Plug 'skywind3000/asyncrun.vim'
-Plug 'https://github.com/w0rp/ale.git'
+Plug 'w0rp/ale'
 Plug 'https://github.com/octol/vim-cpp-enhanced-highlight.git'
 Plug 'https://github.com/Valloric/YouCompleteMe.git'
 Plug 'https://github.com/jiangmiao/auto-pairs.git'
+Plug 'Shougo/echodoc.vim'
+Plug 'joshdick/onedark.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'myusuf3/numbers.vim'
+Plug 'Yggdroot/indentLine'
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 call plug#end()
 "====================== vim-plug配置======================
 
@@ -49,7 +55,7 @@ nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
 
 
 "====================== ale配置======================
-let g:ale_linters_explicit = 1
+""let g:ale_linters_explicit = 1
 let g:ale_completion_delay = 500
 let g:ale_echo_delay = 20
 let g:ale_lint_delay = 500
@@ -63,7 +69,7 @@ let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++11'
 let g:ale_c_cppcheck_options = ''
 let g:ale_cpp_cppcheck_options = ''
 
-let g:ale_sign_error = "\ue009\ue009"
+""let g:ale_sign_error = "\ue009\ue009"
 hi! clear SpellBad
 hi! clear SpellCap
 hi! clear SpellRare
@@ -108,18 +114,73 @@ let g:ycm_semantic_triggers =  {
 "====================== ycmd配置======================
 
 
+"====================== echodoc ======================
+"set noshowmode
+set cmdheight=2
+"====================== echodoc ======================
+
+
+
+"====================== lightline ======================
+set laststatus=2
+if !has('gui_running')
+  set t_Co=256
+endif
+let g:lightline = {
+    \ 'colorscheme': 'onedark',
+    \}
+let g:onedark_termcolors=256
+"====================== lightline ======================
+
+
+"====================== numbers ======================
+let g:numbers_exclude = ['tagbar', 'gundo', 'minibufexpl', 'nerdtree']      "不想在某些地方看见linenumber
+nnoremap <F3> :NumbersToggle<CR>        "设置numbers的快捷键
+nnoremap <F4> :NumbersOnOff<CR>
+"====================== numbers ======================
+
+
+"====================== indentLine ======================
+let g:indentLine_enabled = 1
+let g:indentLine_char = '┆'             "设置对齐线的字符
+let g:indentLine_first_char = '┆'              "设置对齐线的首字符
+let g:indentLine_showFirstIndentLevel = 1   "显示对齐线首字符
+let g:indentLine_color_term = 239               "设置对齐线颜色
+"====================== indentLine ======================
+
+
+
+"====================== LeaderF ======================
+nnoremap <c-p> :LeaderfFunction!<CR>
+let g:Lf_ShortcutF = '<c-p>'
+let g:Lf_ShortcutB = '<m-n>'
+noremap <c-n> :LeaderfMru<cr>
+noremap <c-p> :LeaderfFunction!<cr>
+noremap <c-b> :LeaderfBuffer<cr>
+noremap <c-t> :LeaderfTag<cr>
+let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
+
+let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
+let g:Lf_WorkingDirectoryMode = 'Ac'
+let g:Lf_WindowHeight = 0.30
+let g:Lf_CacheDirectory = expand('~/.vim/cache')
+let g:Lf_ShowRelativePath = 0
+let g:Lf_HideHelp = 1
+let g:Lf_StlColorscheme = 'powerline'
+let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
+"====================== LeaderF ======================
+
+
 
 "====================== better default======================
-set nu
-set autoindent
-set shiftwidth=4
-set tabstop=4
-set expandtab
+set nu              "显示行号
+set autoindent      "自动缩进
+set shiftwidth=4    "缩进宽度
+set tabstop=4       "tab缩进长度
+set expandtab       
 set smarttab
+syntax on           "开启高亮
+colorscheme onedark "onedark主题
+"set guifont=SourceCodePro-BoldIt
+set guifont=SourceCodePro-BlackIt
 "====================== better default======================
-
-
-"====================== auto-pairs ======================
-"====================== auto-pairs ======================
-
-
